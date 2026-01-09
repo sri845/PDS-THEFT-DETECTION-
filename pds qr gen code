@@ -1,0 +1,25 @@
+import qrcode
+import random
+
+# Set your Batch ID here
+#batch_id = 'B501'
+
+# Generate random Batch ID
+batch_id = random.randint(0,9999999999999)
+
+# Generate QR Code
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_L,
+    box_size=10,
+    border=4,
+)
+
+qr.add_data(batch_id)
+qr.make(fit=True)
+
+# Create and save the image
+img = qr.make_image(fill_color="black", back_color="white")
+img.save(f"{batch_id}_qr.png")
+
+print(f"QR code for Batch ID '{batch_id}' saved as '{batch_id}_qr.png'")
